@@ -5,7 +5,6 @@
 <modelVersion>4.0.0</modelVersion>
     <groupId>cn.ganxuan</groupId>
 <artifactId>miniuser-web</artifactId>
-    <packaging>jar</packaging>
 <version>1.0</version>
     <dependencies>
     <dependency>
@@ -128,7 +127,7 @@
             <configuration>
                 <source>1.8</source>
                 <target>1.8</target>
-                <encoding>UTF-8</encoding>
+                <!--<encoding>UTF-8</encoding>-->
             </configuration>
         </plugin>
         <plugin>
@@ -137,53 +136,15 @@
             <version>2.7</version>
             <configuration>
                 <forkMode>never</forkMode>
+                <testFailureIgnore>true</testFailureIgnore>
                 <argLine>-Dfile.encoding=UTF-8</argLine>
                 <suiteXmlFiles>
                     <suiteXmlFile>src/test/testng.xml</suiteXmlFile>
                 </suiteXmlFiles>
+                <skipTests>true</skipTests>
             </configuration>
         </plugin>
-        <plugin>
-            <groupId>org.apache.maven.plugins</groupId>
-            <artifactId>maven-shade-plugin</artifactId>
-            <version>3.1.1</version>
-            <configuration>
-                <createDependencyReducedPom>false</createDependencyReducedPom>
-            </configuration>
-            <executions>
-                <execution>
-                    <phase>package</phase>
-                    <goals>
-                        <goal>shade</goal>
-                    </goals>
-                    <configuration>
-                        <filters>
-                            <filter>
-                                <artifact>*:*</artifact>
-                                <excludes>
-                                    <exclude>META-INF/*.SF</exclude>
-                                    <exclude>META-INF/*.DSA</exclude>
-                                    <exclude>META-INF/*.RSA</exclude>
-                                </excludes>
-                            </filter>
-                        </filters>
-                        <transformers>
-                            <transformer implementation="org.apache.maven.plugins.shade.resource.ManifestResourceTransformer">
-                                <mainClass>com.tooldin.main.ActiveMQMain</mainClass>
-                            </transformer>
-                            <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                                <resource>META-INF/spring.handlers</resource>
-                            </transformer>
-                            <transformer
-                                    implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
-                                <resource>META-INF/spring.schemas</resource>
-                            </transformer>
-                        </transformers>
-                    </configuration>
-                </execution>
-            </executions>
-        </plugin>
+
     </plugins>
 </build>
 </project>
