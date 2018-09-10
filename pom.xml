@@ -6,6 +6,7 @@
     <groupId>cn.ganxuan</groupId>
 <artifactId>miniuser-web</artifactId>
 <version>1.0</version>
+    <packaging>jar</packaging>
     <dependencies>
     <dependency>
         <groupId>backport-util-concurrent</groupId>
@@ -135,13 +136,17 @@
             <artifactId>maven-surefire-plugin</artifactId>
             <version>2.7</version>
             <configuration>
-                <forkMode>never</forkMode>
-                <testFailureIgnore>true</testFailureIgnore>
-                <argLine>-Dfile.encoding=UTF-8</argLine>
-                <suiteXmlFiles>
-                    <suiteXmlFile>src/test/testng.xml</suiteXmlFile>
-                </suiteXmlFiles>
+                <!-- <includes> <include>../*.java</include> </includes>自动识别和运行src/test目录 -->
                 <skipTests>true</skipTests>
+                <includes>
+                    <include>miniuser_web.java</include>
+                    <!-- 跳过测试 -->
+                    <skip></skip>
+                </includes>
+                <!-- maven test 执行testng.xml -->
+                <suiteXmlFiles>
+                    <suiteXmlFile>testng.xml</suiteXmlFile>
+                </suiteXmlFiles>
             </configuration>
         </plugin>
     </plugins>
