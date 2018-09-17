@@ -105,6 +105,13 @@
             <artifactId>log4j-core</artifactId>
             <version>2.11.1</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/mysql/mysql-connector-java -->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <version>5.1.46</version>
+        </dependency>
+
         <!-- https://mvnrepository.com/artifact/org.apache.maven.plugins/maven-jar-plugin -->
         <dependency>
             <groupId>org.apache.maven.plugins</groupId>

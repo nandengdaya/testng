@@ -1,6 +1,7 @@
 package httputil;
 
 import com.alibaba.fastjson.JSONObject;
+import data.MySQL;
 //import com.sun.org.apache.bcel.internal.generic.NEW;
 
 
@@ -13,7 +14,9 @@ public final static String add="http://172.26.40.18:8888/miniuser-web";//测试�
 //    public final static String Content = "application/x-www-form-urlencoded";
     public final static String sid="8411a18625124327b61058ac6793a06d";//用户的sid
     public final static String storeCode="S000183";  //商铺编码
-    public final static String phone = "15658019697";  //手机号
+    //    public final static String phone = "15658019697";  //手机号
+   public final static String mysql1 = "SELECT phone from `user` WHERE openid = 'o7bgM5BIPmfV91oaM-m0ijum8Q-0'";
+    public final static String phone = MySQL.getColumnValues(mysql1,"phone");
 
     public final static String couponId = "11";//优惠券ID
     public final static String goodsCode = "20180808171055947";//商品ID
