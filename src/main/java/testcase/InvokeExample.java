@@ -16,5 +16,4 @@ public class InvokeExample {
        InvokeUtil.invokeMethods(miniuser_web.class,"10003","10004");
     }
 
-
 }

@@ -32,7 +32,7 @@ public class MySQL {
             conn = DriverManager.getConnection(IpPort, userName, passwd);
             //建立Statement对象PreparedStatement对象。
             //Statement stmt=conn.createStatement();
-            System.out.println("-------------数据库连接成功-----------");
+//            System.out.println("-------------数据库连接成功-----------");
         } catch (SQLException e) {
             e.printStackTrace();
             System.out.println("-------------数据库连接失败-----------");

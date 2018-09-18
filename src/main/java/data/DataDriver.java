@@ -20,19 +20,10 @@ public class DataDriver {
     public String Path="H:\\readExcel.xls";
     public String Sheet="test";
 
-    @DataProvider( name= "Repay_Query")
-    public static Object[][] Repay_Query(){   //必须是static的，否则引用不到
-        return new Object[][]{
-                { "T2012017041417510001",""},
-                { "","RepayOrder1492163475573"},
-                { "T2012017041417510001","RepayOrder1492163475573"},
-        };
-    }
-
     @DataProvider( name= "MyDataProvider")
     public static Object[][] getExcelData() {
 //        String excelPath   = "H:\\readExcel.xls";
-        String excelPath   = "H:\\\\readExcel.xls";
+        String excelPath   = "H:\\readExcel.xls";
 //        String excelPath   = "H:\\readExcel.xls";
         String excelSheet  = "test";
         int rowIndex = 0;//定义表格行
@@ -142,8 +133,5 @@ public class DataDriver {
         }
         return arg;
     }
-
-
-
 
 }
