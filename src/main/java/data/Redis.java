@@ -22,13 +22,13 @@ public class Redis {
         pool = new ShardedJedisPool(config, list);
     }
 
-    public static void main(String[] args) {
-        ShardedJedis jedis = pool.getResource();
-        String keys = "myname";
-        //String vaule = jedis.set(keys, "lxr"); //redis下对应key值下写入vaule值
-        String vaule = jedis.get(keys);         //redis下读取对应key值的vaule值
-        System.out.println(vaule);
-    }
+//    public static void main(String[] args) {
+//        ShardedJedis jedis = pool.getResource();
+//        String keys = "myname";
+//        //String vaule = jedis.set(keys, "lxr"); //redis下对应key值下写入vaule值
+//        String vaule = jedis.get(keys);         //redis下读取对应key值的vaule值
+//        System.out.println(vaule);
+//    }
 
     public static String getVaule(String keys) {
         ShardedJedis jedis = pool.getResource();

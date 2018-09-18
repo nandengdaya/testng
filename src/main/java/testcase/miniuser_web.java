@@ -1,11 +1,13 @@
 package testcase;
 
 import com.alibaba.fastjson.JSONObject;
+import data.Redis;
 import httputil.Assert;
 import httputil.HTTPClientUtil;
 import httputil.HttpUtil;
 import httputil.PublicUtil;
 import org.apache.http.util.EntityUtils;
+import org.testng.annotations.BeforeSuite;
 import org.testng.annotations.Test;
 
 
@@ -195,9 +197,10 @@ public class miniuser_web {
         String url = add + "/miniuser/loginByPhone";
         System.out.println(url);
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+        Object yzm = Redis.getVaule("CODE:"+phone); //从Redis读取验证码
         bodyMap.put("phone", phone);
         bodyMap.put("sid", sid);
-        bodyMap.put("code", phonecode);
+        bodyMap.put("code", yzm);
         System.out.println("请求参数： " + bodyMap);
         String result = HTTPClientUtil.doPost(url, bodyMap);
         System.out.println("响应参数： " + result);
@@ -1115,6 +1118,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
+    @BeforeSuite
     @Test(enabled = true)
     @TestCase(id = "100051", description = "验证码接口")
     public void app_yzm() throws Exception {

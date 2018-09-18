@@ -11,6 +11,7 @@ public class InvokeUtil {
         Object obj = clazz.newInstance();
         for (String str:strs){
             invokeMethod(obj, str);
+            Thread.sleep(2000);
         }
     }
 

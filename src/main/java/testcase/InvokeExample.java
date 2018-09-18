@@ -12,8 +12,8 @@ public class InvokeExample {
         //1.初始化环境
 
         //2.根据场景组合调用不同的测试用例
-       InvokeUtil.invokeMethods(miniuser_web.class,"10002","10003");
-       InvokeUtil.invokeMethods(miniuser_web.class,"10003","10004");
+       InvokeUtil.invokeMethods(miniuser_web.class,"100051","100009");
+//       InvokeUtil.invokeMethods(miniuser_web.class,"10003","10004");
     }
 
 }

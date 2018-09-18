@@ -22,7 +22,6 @@ public final static String add="http://172.26.40.18:8888/miniuser-web";//测试�
     public final static String couponId = "11";//优惠券ID
     public final static String goodsCode = "20180808171055947";//商品ID
     public final static String code = "12345";//微信小程序登录传递参数:code
-    public final static String phonecode = "12345";//验证码
     public final static String encryptedData = "";//
     public final static String iv = "";//
     public final static String orderCode = "201809041000442343";//订单code
@@ -38,7 +37,7 @@ public final static String add="http://172.26.40.18:8888/miniuser-web";//测试�
     public final static String y = "120.13073";//维度
     public final static String flag  = "1";//flag表示(1代码增加，2代表减少)
     public final static String storename = "火车";//门店名字
-    public final static String yzm = Redis.getVaule("CODE:"+phone);//从redis获取对应手机号的验证码
+//    public final static String yzm = Redis.getVaule("CODE:"+phone);//从redis获取对应手机号的验证码
 //   public final static Object num1 =DataDriver.getExcelData()[0][0];    //读取Excel一行数据
 
 
@@ -57,6 +56,6 @@ public final static String add="http://172.26.40.18:8888/miniuser-web";//测试�
     }
 
    public static void main(String[] args) {
-    System.out.println(yzm);
+    System.out.println();
    }
 }
