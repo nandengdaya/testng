@@ -191,7 +191,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = true,dependsOnMethods = { "app_yzm" }) //执行该条测试用例前要先执行app_yzm
     @TestCase(id = "100009", description = "微信小程序手机号码登录")
     public void miniuser_loginByPhone() throws Exception {
         String url = add + "/miniuser/loginByPhone";
@@ -1118,7 +1118,6 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @BeforeSuite
     @Test(enabled = true)
     @TestCase(id = "100051", description = "验证码接口")
     public void app_yzm() throws Exception {
