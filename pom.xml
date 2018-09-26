@@ -159,9 +159,9 @@
             <version>2.7</version>
             <configuration>
                 <!-- <includes> <include>../*.java</include> </includes>自动识别和运行src/test目录 -->
-                <skipTests>true</skipTests>
+                <!--<skipTests>true</skipTests>-->
                 <includes>
-                    <include>miniuser_web.java</include>
+                    <include>**/miniuser_web.java</include>
                     <!-- 跳过测试 -->
                     <skip></skip>
                 </includes>

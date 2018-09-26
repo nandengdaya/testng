@@ -24,9 +24,9 @@ public class Redis {
 
 //    public static void main(String[] args) {
 //        ShardedJedis jedis = pool.getResource();
-//        String keys = "myname";
-//        //String vaule = jedis.set(keys, "lxr"); //redis下对应key值下写入vaule值
-//        String vaule = jedis.get(keys);         //redis下读取对应key值的vaule值
+//        String keys = "sid123456";
+//        String vaule = jedis.set(keys, "o7bgM5BIPmfV91oaM-m0ijum8Q-0"); //redis下对应key值下写入vaule值
+//       // String vaule = jedis.get(keys);         //redis下读取对应key值的vaule值
 //        System.out.println(vaule);
 //    }
 
@@ -34,5 +34,12 @@ public class Redis {
         ShardedJedis jedis = pool.getResource();
         String vaule = jedis.get(keys);
         return vaule;
+    }
+
+    public static String getSid() {
+        ShardedJedis jedis = pool.getResource();
+        String sid = "sid123456";
+        String vaule = jedis.set(sid, "kZbhgFVMxrJKcRIkVO5xtQ==#o7bgM5BIPmfV91oaM-m0ijum8Q-0"); //redis下对应key值下写入vaule值
+        return sid;
     }
 }

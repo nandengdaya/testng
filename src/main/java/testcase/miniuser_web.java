@@ -16,7 +16,7 @@ import java.util.LinkedHashMap;
 import static httputil.PublicUtil.*;
 
 public class miniuser_web {
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100001", description = "计算选中的优惠券的优惠金额")
     public void coupon_calc() throws Exception {
         String url = add + "/coupon/calc";
@@ -170,7 +170,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100008", description = "微信小程序登录传递参数:code")
     public void miniuser_loginByCode() throws Exception {
         String url = add + "/miniuser/loginByCode";
@@ -191,7 +191,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true,dependsOnMethods = { "app_yzm" }) //执行该条测试用例前要先执行app_yzm
+    @Test(enabled = false,dependsOnMethods = { "app_yzm" }) //执行该条测试用例前要先执行app_yzm
     @TestCase(id = "100009", description = "微信小程序手机号码登录")
     public void miniuser_loginByPhone() throws Exception {
         String url = add + "/miniuser/loginByPhone";
@@ -363,7 +363,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100017", description = "订单中心-取消订单")
     public void order_cancel() throws Exception {
         String url = add + "/order/cancel";
@@ -385,7 +385,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false,dependsOnMethods = { "shopcar_edit" })
     @TestCase(id = "100018", description = "校验购物车中的商品是否售空")
     public void order_checkShopCar() throws Exception {
         String url = add + "/order/checkShopCar";
@@ -429,7 +429,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100020", description = "订单中心-删除订单")
     public void order_delete() throws Exception {
         String url = add + "/order/delete";
@@ -495,7 +495,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100023", description = "订单详情-无优惠付款")
     public void order_pay() throws Exception {
         String url = add + "/order/pay";
@@ -520,7 +520,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100024", description = "订单详情-使用优惠券付款")
     public void order_payWithCoupon() throws Exception {
         String url = add + "/order/payWithCoupon";
@@ -546,7 +546,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100025", description = "订单中心-再来一单")
     public void order_rebuy() throws Exception {
         String url = add + "/order/rebuy";
@@ -568,14 +568,14 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100026", description = "订单中心-支付待支付订单")
     public void order_repay() throws Exception {
         String url = add + "/order/repay";
         System.out.println(url);
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
         bodyMap.put("sid", sid);
-        bodyMap.put("orderCode", orderCode);
+        bodyMap.put("orderCode", repayorderCode);
         System.out.println("请求参数： " + bodyMap);
         String result = HTTPClientUtil.doPost(url, bodyMap);
         System.out.println("响应参数： " + result);
@@ -590,7 +590,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100027", description = "订单中心-出示订单二维码")
     public void order_showqr() throws Exception {
         String url = add + "/order/showqr";
@@ -633,7 +633,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100029", description = "根据sid查询‘我的积分’页面的信息")
     public void pay_cancel() throws Exception {
         String url = add + "/pay/cancel";
@@ -655,7 +655,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100030", description = "检查支付结果")
     public void pay_checkstate() throws Exception {
         String url = add + "/pay/checkstate";
@@ -677,7 +677,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100031", description = "检测退款单状态")
     public void refund_checkstate() throws Exception {
         String url = add + "/refund/checkstate";
@@ -1075,7 +1075,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "100049", description = "根据经纬度查询周围的五家门店")
     public void store_searchAround5() throws Exception {
         String url = add + "/store/searchAround5";
@@ -1118,7 +1118,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = true)
+    @Test(enabled =false)
     @TestCase(id = "100051", description = "验证码接口")
     public void app_yzm() throws Exception {
         String url = add + "/app/yzm";
