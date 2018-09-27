@@ -16,7 +16,7 @@ import java.util.LinkedHashMap;
 import static httputil.PublicUtil.*;
 
 public class miniuser_web {
-    @Test(enabled = false)
+    @Test(enabled = true)
     @TestCase(id = "100001", description = "计算选中的优惠券的优惠金额")
     public void coupon_calc() throws Exception {
         String url = add + "/coupon/calc";
@@ -321,7 +321,7 @@ public class miniuser_web {
         Assert.assertEquals(actual_ret_status,status,"操作失败");/*断言status的值与预期值是否一致*/
     }
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     @TestCase(id = "100015", description = "微信退款结果通知")
     public void notify_wxrefund() throws Exception {
         String url = add + "/notify/wxrefund";
