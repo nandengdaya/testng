@@ -6,4 +6,11 @@
             <class name="testcase.miniuser_web"/>
         </classes>
     </test>
+    <listeners>
+        <listener class-name="testcase.miniuser_web" />
+    </listeners>
+    <!--<usedefaultlisteners name="false" />-->
 </suite>
+
+
+
