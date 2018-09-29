@@ -44,7 +44,7 @@ public class miniuser_web {
         String url = add + "/coupon/queryAll";
         System.out.println(url);
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
-        bodyMap.put("sid", "123");
+        bodyMap.put("sid",sid);
         System.out.println("请求参数： " + bodyMap);
         String result = HTTPClientUtil.doPost(url, bodyMap);
         System.out.println("响应参数： " + result);
