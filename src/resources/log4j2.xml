@@ -9,7 +9,7 @@
         </File>
     </Appenders>
     <Loggers>
-        <Logger name="Btjf_API.CAPI" level="all" additivity="false">
+        <Logger name="miniuser_store_web" level="all" additivity="false">
             <AppenderRef ref = "Console"/>
             <AppenderRef ref = "log"/>
         </Logger>
