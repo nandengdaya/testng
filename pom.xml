@@ -161,7 +161,7 @@
                     <!-- <includes> <include>../*.java</include> </includes>自动识别和运行src/test目录 -->
                     <!--<skipTests>true</skipTests>-->
                     <includes>
-                        <include>**/miniuser_web.java</include>
+                        <include>**/miniuser_store_web.java</include>
                         <!-- 跳过测试 -->
                         <skip></skip>
                     </includes>
@@ -172,5 +172,13 @@
                 </configuration>
             </plugin>
         </plugins>
+        <resources>
+            <resource>
+                <directory>src/resources</directory>
+                <includes>
+                    <include>**/*.xml</include>
+                </includes>
+            </resource>
+        </resources>
     </build>
 </project>
