@@ -9,11 +9,14 @@ import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.testng.Reporter;
+import testcase.store_web_activity;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.Set;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.io.UnsupportedEncodingException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.*;
 
 /**
  * http请求的工具类
@@ -21,10 +24,6 @@ import java.util.Set;
 public class HttpUtil {
 
     private static final Log log = new Log(HttpUtil.class);
-    private static LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
-    static {
-//        HEADER.put("Api-Version",PublicUtil.version);   //传送请求头，应用版本信息
-    }
 
     /**
      * http的post请求方法,包含请求头和请求体
@@ -34,12 +33,15 @@ public class HttpUtil {
      * @throws Exception
      */
 
-    public static JSONObject postRequest(String url, HashMap<String,Object> bodyMap){
+    public static JSONObject sendPost(String url,HashMap<String,Object> HEADER, HashMap<String,Object> bodyMap){
         CloseableHttpClient httpClient = HttpClients.createDefault();// 创建默认的httpClient实例
         HttpPost post = new HttpPost(url);
-        addPostHeader(post);//添加请求头
+        Set<String> set = HEADER.keySet();
+        for(String key : set){
+            post.addHeader(key, HEADER.get(key).toString());
+        }
         JSONObject bodyJson = new JSONObject(bodyMap);
-        ContentType contentType = ContentType.create("application/x-www-form-urlencoded","utf-8");//通过Json方式请求
+        ContentType contentType = ContentType.create("application/json","utf-8");//通过Json方式请求
         HttpEntity entity = new StringEntity(bodyJson.toString(),contentType);
         post.setEntity(entity);
         CloseableHttpResponse httpResponse = null;
@@ -52,18 +54,7 @@ public class HttpUtil {
             e.printStackTrace();
             throw new RuntimeException("发送请求出现异常:");
         }
-
         return getResultJson(result);
-    }
-
-    /**
-     *给post添加请求头信息
-     */
-    public static void addPostHeader(HttpPost post){
-        Set<String> set = HEADER.keySet();
-        for(String key : set){
-            post.addHeader(key, HEADER.get(key).toString());
-        }
     }
 
     /**
@@ -71,6 +62,26 @@ public class HttpUtil {
      * */
     public void print(String s){
         System.out.println(s);
+    }
+
+    public static String sendGet(String url, HashMap<String,Object> HEADER,String param) throws UnsupportedEncodingException {
+        CloseableHttpClient httpClient = HttpClients.createDefault();// 创建默认的httpClient实例
+        HttpGet get = new HttpGet(url);
+        Set<String> set = HEADER.keySet();
+        for(String key : set){
+            get.addHeader(key, HEADER.get(key).toString());
+        }
+        CloseableHttpResponse httpResponse = null;
+        String result = null;
+        try {
+            httpResponse = httpClient.execute(get);
+            HttpEntity resultEntity = httpResponse.getEntity();
+            result = EntityUtils.toString(resultEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("发送请求出现异常:");
+        }
+        return result;
     }
 
     /**
@@ -94,6 +105,4 @@ public class HttpUtil {
             return null;
         }
     }
-
-
 }

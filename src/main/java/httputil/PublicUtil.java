@@ -5,60 +5,50 @@ import data.DataDriver;
 import data.MySQL;
 import data.Redis;
 
+import java.util.HashMap;
+import java.util.LinkedHashMap;
+import java.util.Map;
+
 //import com.sun.org.apache.bcel.internal.generic.NEW;
 
 public class PublicUtil {
-//  public final static String add="http://172.27.1.110:8080/miniuser-web";//开发环境
-public final static String add="http://172.26.40.18:8888/miniuser-web";//测试环境
-
-//    public final static String version="";        //应用版本号
-//    public final static String Content = "application/x-www-form-urlencoded";
-    public final static String phone_mysql = "SELECT * from `user` WHERE openid = 'o7bgM5BIPmfV91oaM-m0ijum8Q-0'";
-    public final static String goods_mysql = "SELECT * from store_goods WHERE store_code ='S000183' AND surplus != 0 LIMIT 1";
-    public final static String order_mysql = "SELECT * from `order` WHERE openid = 'o7bgM5BIPmfV91oaM-m0ijum8Q-0' LIMIT 1";
-    public final static String repay_order_mysql = "SELECT * from `order` WHERE openid = 'o7bgM5BIPmfV91oaM-m0ijum8Q-0' and `status` = 1 LIMIT 1";
-    public final static String sid=Redis.getSid();//获取用户的sid
-    public final static String storeCode="S000183";  //商铺编码
-
-
-    public final static String phone = MySQL.getColumnValues(phone_mysql,"phone");//手机号
-    public final static String couponId = "8";//优惠券ID
-    public final static String goodsCode = MySQL.getColumnValues(goods_mysql,"goods_code");//商品ID
-    public final static String code = "12345";//微信小程序登录传递参数:code
-    public final static String encryptedData = "";//
-    public final static String iv = "";//
-    public final static String orderCode = MySQL.getColumnValues(order_mysql,"code");//订单code
-    public final static String repayorderCode = MySQL.getColumnValues(repay_order_mysql,"code");//订单code
-    public final static String tip = "1";//tip标识，1:去结算，2:去支付
-    public final static String address = "浙江省杭州市江干区东站枢纽西广场G层8号商铺";//店铺地址
-    public final static String fixedTime = "";//预约时间
-    public final static String takeType = "1";//预约类型
-    public final static String userMemo = "";//客户备注
-    public final static String payCode = "F201809171616442178";//支付编码
-    public final static String refundCode = "TK20180904095859273";//订单编码
-    public final static String categorycode = "20180808171000915";//商品分类
-    public final static String x = "30.320046";//经度
-    public final static String y = "120.13073";//维度
-    public final static String flag  = "1";//flag表示(1代码增加，2代表减少)
-    public final static String storename = "火车";//门店名字
-//    public final static String yzm = Redis.getVaule("CODE:"+phone);//从redis获取对应手机号的验证码
-//   public final static Object num1 =DataDriver.getExcelData()[0][0];    //读取Excel一行数据
+    //  public final static String add="http://172.27.1.110:8080/miniuser-web";//开发环境
+    /*定义couponId*/
+    public final static String couponId = "123";
+    public final static String storeCode = "f12345";
+    /*通过数据库获取手机后*/
+//    public final static String phone_mysql = "SELECT * from `user` WHERE openid = 'o7bgM5BIPmfV91oaM-m0ijum8Q-0'";
+//    public final static String phone = MySQL.getColumnValues(phone_mysql,"phone");//手机号
+    /*通过redis获取用户sid*/
+//    public final static String sid=Redis.getSid();
+    public final static String sid="123";
+    /*从redis获取对应手机号的验证码*/
+//    public final static String yzm = Redis.getVaule("CODE:"+phone);
+    /*读取Excel一行数据*/
+//   public final static Object num1 =DataDriver.getExcelData()[0][0];
 
 
+    /*mobilego项目*/
+    public final static String add="https://test-api.mobilemart.cn";//测试环境
+    public final static String user_token = "8681140a7b7c523f6e1f1ddaf7744c5b";   //用户token
+    public final static String admin_token = "4f790ba3ec68c7d1aa67be0bf291b697";  //站点管理员token
+    public final static String shelfSn = "23604855";//货柜编号
+    public final static String activitySn = "91028901789";//活动编号
+    public final static String stationId = "125";//站点编号
     //定义通用业务状态码
-    public final static String status="1";                       //交互成功
+    public final static String status="0";                       //交互成功
 
     /*
-    *获取Json字符串中某个键的值
-    * @resultObject  Json字符串
-    * @code Json字符串Key值
+     *获取Json字符串中某个键的值
+     * @resultObject  Json字符串
+     * @code Json字符串Key值
      */
     public static String getResultJson(JSONObject json,String ret_code){
         String return_code=json.getString(ret_code);
         return  return_code;
     }
 
-   public static void main(String[] args) {
-       System.out.println(goodsCode);
-   }
+    public static void main(String[] args) {
+        System.out.println();
+    }
 }
