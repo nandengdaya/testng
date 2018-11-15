@@ -31,7 +31,7 @@ import java.util.LinkedHashMap;
 import static httputil.PublicUtil.*;
 
 public class store_web_activity  {
-    @Test(enabled = false)
+    @Test(enabled = true)
     @TestCase(id = "1000001", description = "活动主页--玛仕活动")
     public void main_activitySn_status() throws Exception {
         String url = add + "/store-web/activity/v1/ms/main/" + activitySn + "/" + status;
@@ -75,7 +75,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     @TestCase(id = "1000003", description = "抽奖接口---玛仕活动")
     public void ms_lucky_draw() throws Exception {
         String url = add + "/store-web/activity/v1/ms/lucky_draw";
@@ -212,7 +212,7 @@ public class store_web_activity  {
     @Test(enabled = true)
     @TestCase(id = "1000008", description = "收到邀请---玛氏活动")
     public void assistance_actSn_teamId() throws Exception {
-        String url = add + "/store-web/user/assistance/"+activitySn+"/360";
+        String url = add + "/store-web/user/assistance/"+activitySn+"/374";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",PublicUtil.user_token);
@@ -239,7 +239,7 @@ public class store_web_activity  {
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",PublicUtil.user_token);
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
-        bodyMap.put("teamId", "360");
+        bodyMap.put("teamId", "374");
 //        bodyMap.put("currentPage", "1");
 //        bodyMap.put("pageSize", "10");
         System.out.println("请求参数： " + bodyMap);
@@ -256,7 +256,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = false)
+    @Test(enabled = true)
     @TestCase(id = "1000010", description = "助力别人--玛氏活动")
     public void activity_team_help() throws Exception {
         String url = add + "/store-web/activity/team/help";
@@ -264,7 +264,7 @@ public class store_web_activity  {
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",PublicUtil.user_token);
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
-        bodyMap.put("teamId", "360");
+        bodyMap.put("teamId", "374");
         bodyMap.put("activitySn", activitySn);
         bodyMap.put("appUserId", "");
         bodyMap.put("isLeader", "");
