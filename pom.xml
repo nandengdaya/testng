@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-    <groupId>cn.ganxuan</groupId>
-    <artifactId>miniuser-web</artifactId>
+    <groupId>cn.MobileGo</groupId>
+    <artifactId>testng</artifactId>
     <version>1.0</version>
     <packaging>jar</packaging>
     <dependencies>
@@ -161,7 +161,7 @@
                     <!-- <includes> <include>../*.java</include> </includes>自动识别和运行src/test目录 -->
                     <!--<skipTests>true</skipTests>-->
                     <includes>
-                        <include>**/miniuser_store_web.java</include>
+                        <include>**/store_web_activity.java</include>
                         <!-- 跳过测试 -->
                         <skip></skip>
                     </includes>
