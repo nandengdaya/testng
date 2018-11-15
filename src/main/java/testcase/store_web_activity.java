@@ -92,7 +92,7 @@ public class store_web_activity  {
         String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
         String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
         /*验证预期值 和实际返回值是否一致*/
-        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        String response = Assert.verify_Equality("103", actual_ret_status);
         System.out.println(response + "------->原因是：" + actual_ret_msg);
         /*断言status的值与预期值是否一致*/
         Assert.assertEquals(actual_ret_status, "103", "操作失败");
@@ -281,7 +281,7 @@ public class store_web_activity  {
         String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
         String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
         /*验证预期值 和实际返回值是否一致*/
-        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        String response = Assert.verify_Equality("-5", actual_ret_status);
         System.out.println(response + "------->原因是：" + actual_ret_msg);
         /*断言status的值与预期值是否一致*/
         Assert.assertEquals(actual_ret_status, "-5", "操作失败");
@@ -312,7 +312,7 @@ public class store_web_activity  {
         String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
         String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
         /*验证预期值 和实际返回值是否一致*/
-        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        String response = Assert.verify_Equality("-7", actual_ret_status);
         System.out.println(response + "------->原因是：" + actual_ret_msg);
         /*断言status的值与预期值是否一致*/
         Assert.assertEquals(actual_ret_status, "-7", "操作失败");
