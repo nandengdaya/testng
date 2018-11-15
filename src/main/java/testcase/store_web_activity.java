@@ -95,7 +95,7 @@ public class store_web_activity  {
         String response = Assert.verify_Equality("103", actual_ret_status);
         System.out.println(response + "------->原因是：" + actual_ret_msg);
         /*断言status的值与预期值是否一致*/
-        Assert.assertEquals(actual_ret_status, "103", "操作失败");
+        Assert.assertEquals(actual_ret_status, "10", "操作失败");
     }
 
 
