@@ -9,11 +9,11 @@ public class MySQL {
     private static Connection conn;
     // JDBC 驱动名及数据库 URL
     static final String driverName = "com.mysql.jdbc.Driver";
-    static final String IpPort = "jdbc:mysql://172.26.40.18:3306/test?useSSL=false";
+    static final String IpPort = "jdbc:mysql://47.98.215.226:3306/mgo?characterEncoding=utf-8";
     //jdbc:mysql://172.26.40.18:3306 or jdbc:mysql://localhost:3306/RUNOOB
     // 数据库的用户名与密码，需要根据自己的设置
-    static final String userName = "gqs";
-    static final String passwd = "Gqs@2018";
+    static final String userName = "test";
+    static final String passwd = "%mQ2hgjyhz4Echa";
 
     //连接数据库
     static {
