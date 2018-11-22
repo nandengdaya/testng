@@ -30,8 +30,10 @@ public class PublicUtil {
 
     /*mobilego项目*/
     public final static String add="https://test-api.mobilemart.cn";//测试环境
+//    public final static String add="https://dev-api.mobilemart.cn";//开发环境
+
     public final static String user_token = "8681140a7b7c523f6e1f1ddaf7744c5b";   //用户token
-    public final static String admin_token = "4f790ba3ec68c7d1aa67be0bf291b697";  //站点管理员token
+    public final static String admin_token = "e79141a9e4f9565b8de9554a1016f53f";  //站点管理员token
     public final static String shelfSn = "23604855";//货柜编号
     public final static String activitySn = "91028901789";//活动编号
     public final static String stationId = "125";//站点编号
@@ -47,6 +49,8 @@ public class PublicUtil {
         String return_code=json.getString(ret_code);
         return  return_code;
     }
+
+
 
     public static void main(String[] args) {
 

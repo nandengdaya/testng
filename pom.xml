@@ -68,7 +68,7 @@
         <dependency>
             <groupId>com.alibaba</groupId>
             <artifactId>fastjson</artifactId>
-            <version>1.2.4</version>
+            <version>1.2.37</version>
         </dependency>
         <dependency>
             <groupId>javax.mail</groupId>
@@ -161,7 +161,8 @@
                     <!-- <includes> <include>../*.java</include> </includes>自动识别和运行src/test目录 -->
                     <!--<skipTests>true</skipTests>-->
                     <includes>
-                        <include>**/store_web_activity.java</include>
+                        <!--<include>**/store_web_activity.java</include>-->
+                        <!--<include>**/station_web.java</include>-->
                         <!-- 跳过测试 -->
                         <skip></skip>
                     </includes>
