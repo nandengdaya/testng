@@ -21,7 +21,6 @@ package testcase;
 import com.alibaba.fastjson.JSONObject;
 import httputil.Assert;
 import httputil.HttpUtil;
-import httputil.Log;
 import httputil.PublicUtil;
 import org.testng.annotations.Test;
 
@@ -212,7 +211,7 @@ public class store_web_activity  {
     @Test(enabled = true)
     @TestCase(id = "1000008", description = "收到邀请---玛氏活动")
     public void assistance_actSn_teamId() throws Exception {
-        String url = add + "/store-web/user/assistance/"+activitySn+"/374";
+        String url = add + "/store-web/user/assistance/"+activitySn+"/382";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",PublicUtil.user_token);
@@ -327,7 +326,7 @@ public class store_web_activity  {
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",PublicUtil.user_token);
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
-        bodyMap.put("content","测试");
+        bodyMap.put("content","https://h5.xiaojubianli.com/qrcode-xcx/powerSharingPageForPre.html?creatorId=175233&actSn=91028901789&teamId=374");
         System.out.println("请求参数： " + bodyMap);
         JSONObject resultJson = HttpUtil.sendPost(url, HEADER,bodyMap);
         System.out.println("响应参数： " + resultJson);
