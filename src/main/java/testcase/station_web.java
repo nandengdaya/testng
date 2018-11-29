@@ -28,6 +28,7 @@ import static httputil.PublicUtil.*;
  **/
 public class station_web {
     public String token ;
+    public final static String skuid = "SELECT * from `user` WHERE openid = 'o7bgM5BIPmfV91oaM-m0ijum8Q-0'";
     @Test(enabled = true,priority = 1)
     @TestCase(id = "2000001", description = "登录短信发送-魔急便")
     public void dingtalk_send_message() throws Exception {
@@ -124,7 +125,7 @@ public class station_web {
     @Test(enabled = true,priority = 3)
     @TestCase(id = "2000005", description = "扫码支付-魔急便")
     public void scanpay_orderSn_code() throws Exception {
-        String url = add + "/payment-web/scanpay/scanpay/181122162600799697/134729406673420299";
+        String url = add + "/payment-web/scanpay/scanpay/181129105335749697/134736083304504384";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",token);
@@ -216,7 +217,7 @@ public class station_web {
     @TestCase(id = "2000009", description = "站点下订单-魔急便")
     public void order_appId_sn() throws Exception {
         String url = add + "/station-web/station/order/2/125";
-        String list = "{\"skuId\": 112,\"name\": \"球型雨衣\",\"num\": 1,\"content\": \"\",\"price\": 1,\"perTotalPrice\": 1,\"showPrice\": \"0.01\",\"showPerTotalPrice\": \"0.01\"}";
+        String list = "{\"skuId\": 12,\"name\": \"熊本熊饮用水\",\"num\": 1,\"content\": \"\",\"price\": 1,\"perTotalPrice\": 1,\"showPrice\": \"0.01\",\"showPerTotalPrice\": \"0.01\"}";
         JSONArray Jsonlist = new JSONArray();
         Jsonlist.add(JSONObject.parseObject(list));
         System.out.println(url);
