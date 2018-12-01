@@ -125,7 +125,7 @@ public class station_web {
     @Test(enabled = true,priority = 3)
     @TestCase(id = "2000005", description = "扫码支付-魔急便")
     public void scanpay_orderSn_code() throws Exception {
-        String url = add + "/payment-web/scanpay/scanpay/181129105335749697/134736083304504384";
+        String url = add + "/payment-web/scanpay/scanpay/181201139194499697/134604522522416333";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",token);
