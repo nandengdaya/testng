@@ -5,6 +5,9 @@ package testcase;
  /payment-web/scanpay/refund/orderSn返回的状态码断言的值是"-3"
  因为每笔订单只能退款一次，所以断言的是退款已退过款的状态（-3）
 
+ 扫码支付-魔急便
+ /scanpay/orderSn/code,传入的参数当天可以成功，第二天就会返回失败，其中有一个参数是微信的支付码，问题原因需要查明
+
  非特殊说明的，接口返回状态码断言都是成功（0）
 
  ***/
@@ -122,7 +125,7 @@ public class station_web {
     }
 
 
-    @Test(enabled = true,priority = 3)
+    @Test(enabled = false,priority = 3)
     @TestCase(id = "2000005", description = "扫码支付-魔急便")
     public void scanpay_orderSn_code() throws Exception {
         String url = add + "/payment-web/scanpay/scanpay/181201139194499697/134604522522416333";
