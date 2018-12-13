@@ -211,7 +211,7 @@ public class store_web_activity  {
     @Test(enabled = true)
     @TestCase(id = "1000008", description = "收到邀请---玛氏活动")
     public void assistance_actSn_teamId() throws Exception {
-        String url = add + "/store-web/user/assistance/"+activitySn+"/395";
+        String url = add + "/store-web/user/assistance/"+activitySn+"/393";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",PublicUtil.user_token);
