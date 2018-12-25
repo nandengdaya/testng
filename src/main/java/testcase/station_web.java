@@ -71,7 +71,7 @@ public class station_web {
         System.out.println(response + "------->原因是：" + actual_ret_msg);
         /*断言status的值与预期值是否一致*/
         Assert.assertEquals(actual_ret_status, status, "操作失败");
-        }
+    }
 
 
     @Test(enabled = true,priority = 2)
