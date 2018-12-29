@@ -2,21 +2,20 @@ package httputil;
 
 import com.alibaba.fastjson.JSONObject;
 import org.apache.http.HttpEntity;
-import org.apache.http.client.methods.*;
+import org.apache.http.client.methods.CloseableHttpResponse;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.client.methods.HttpPut;
 import org.apache.http.entity.ContentType;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.CloseableHttpClient;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.testng.Reporter;
-import testcase.store_web_activity;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.net.URL;
-import java.net.URLConnection;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Set;
 
 /**
  * http请求的工具类
@@ -83,6 +82,35 @@ public class HttpUtil {
         }
         return result;
     }
+
+
+    public static JSONObject sendPut(String url,HashMap<String,Object> HEADER, HashMap<String,Object> bodyMap){
+        CloseableHttpClient httpClient = HttpClients.createDefault();// 创建默认的httpClient实例
+        HttpPut put = new HttpPut(url);
+        Set<String> set = HEADER.keySet();
+        for(String key : set){
+            put.addHeader(key, HEADER.get(key).toString());
+        }
+        JSONObject bodyJson = new JSONObject(bodyMap);
+        ContentType contentType = ContentType.create("application/json","utf-8");//通过Json方式请求
+        HttpEntity entity = new StringEntity(bodyJson.toString(),contentType);
+        put.setEntity(entity);
+        CloseableHttpResponse httpResponse = null;
+        String result = null;
+        try {
+            httpResponse = httpClient.execute(put);
+            HttpEntity resultEntity = httpResponse.getEntity();
+            result = EntityUtils.toString(resultEntity);
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException("发送请求出现异常:");
+        }
+        return getResultJson(result);
+    }
+
+
+
+
 
     /**
      * 把服务器返回的结果做判断，最终返回一个JSONObject
