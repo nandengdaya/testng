@@ -5,6 +5,7 @@
         <classes>
             <class name="testcase.store_web_activity"/>
             <class name="testcase.station_web"/>
+            <class name="driver.driver_app"/>
         </classes>
     </test>
 </suite>
