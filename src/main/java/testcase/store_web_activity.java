@@ -30,7 +30,7 @@ import java.util.LinkedHashMap;
 import static httputil.PublicUtil.*;
 
 public class store_web_activity  {
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000001", description = "活动主页--玛仕活动")
     public void main_activitySn_status() throws Exception {
         String url = add + "/store-web/activity/v1/ms/main/" + activitySn + "/" + status;
@@ -52,7 +52,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000002", description = "活动抽奖次数--玛仕活动")
     public void lottery_num_activitySn() throws Exception {
         String url = add + "/store-web/activity/v1/ms/lottery_num/" + activitySn;
@@ -74,7 +74,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000003", description = "抽奖接口---玛仕活动")
     public void ms_lucky_draw() throws Exception {
         String url = add + "/store-web/activity/v1/ms/lucky_draw";
@@ -98,7 +98,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000004", description = "地址-新建和编辑收货地址")
     public void address_info_add() throws Exception {
         String url = add + "/store-web/user/address/info";
@@ -132,7 +132,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000005", description = "地址-收货地址的回显")
     public void address_info_display() throws Exception {
         String url = add + "/store-web/user/address/info/110";
@@ -154,7 +154,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000006", description = "我的中奖记录列表---玛氏活动")
     public void prize_record_actSn() throws Exception {
         String url = add + "/store-web/user/prize/record/"+activitySn;
@@ -176,7 +176,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000007", description = "更新我的中奖记录---玛氏活动")
     public void user_prize_logistics() throws Exception {
         String url = add + "/store-web/user/prize/logistics";
@@ -208,7 +208,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000008", description = "收到邀请---玛氏活动")
     public void assistance_actSn_teamId() throws Exception {
         String url = add + "/store-web/user/assistance/"+activitySn+"/393";
@@ -230,7 +230,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000009", description = "获取更多参赛队员----玛仕活动")
     public void team_v1_list() throws Exception {
         String url = add + "/store-web/activity/team/v1/list";
@@ -255,7 +255,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000010", description = "助力别人--玛氏活动")
     public void activity_team_help() throws Exception {
         String url = add + "/store-web/activity/team/help";
@@ -287,7 +287,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000011", description = "发起助力---玛氏活动")
     public void activity_team_organize() throws Exception {
         String url = add + "/store-web/activity/team/organize";
@@ -318,7 +318,7 @@ public class store_web_activity  {
     }
 
 
-    @Test(enabled = true)
+    @Test(enabled = false)
     @TestCase(id = "1000012", description = "动态生成海报")
     public void user_upload() throws Exception {
         String url = add + "/store-web/user/upload";
