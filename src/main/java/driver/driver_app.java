@@ -410,8 +410,8 @@ public class driver_app {
         String url = add + "/driver-center-api/gas/coupons";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
-        HEADER.put("X-AuthToken-With","wannengdatokenjiushini333333");
-        HEADER.put("openId","b88debaff2d356c6659164e7790efe68");
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
         String result = HttpUtil.sendGet(url,HEADER,"");
         System.out.println("响应参数： " + result);
         /*返回结果转换成json对象*/
