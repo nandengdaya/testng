@@ -20,6 +20,7 @@ import static httputil.PublicUtil.status;
 public class driver_app {
     public String token ;
     public String openId ;
+    public String order ;
 
     @Test(enabled = true,priority = 1)
     @TestCase(id = "3000001", description = "发短信(司机端通用)")
@@ -28,7 +29,7 @@ public class driver_app {
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
-        bodyMap.put("tel", "15658019697");
+        bodyMap.put("tel", "13200000001");
         System.out.println("请求参数： " + bodyMap);
         JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
         System.out.println("响应参数： " + resultJson);
@@ -51,7 +52,7 @@ public class driver_app {
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
 //        bodyMap.put("districSn","" );
-        bodyMap.put("tel", "15658019697");
+        bodyMap.put("tel", "13200000001");
         bodyMap.put("code", "6666");
         System.out.println("请求参数： " + bodyMap);
         JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
@@ -201,7 +202,7 @@ public class driver_app {
     @Test(enabled = true,priority = 3)
     @TestCase(id = "3000008", description = "计算订单优惠金额")
     public void gas_calculateDiscountAmount() throws Exception {
-        String url = add + "/driver-center-api/gas/calculateDiscountAmount?oilId=2500&originAmount=200&couponSeq=";
+        String url = add + "/driver-center-api/gas/calculateDiscountAmount?oilId=3141&originAmount=20000&couponSeq=";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("X-AuthToken-With",token);
@@ -296,22 +297,75 @@ public class driver_app {
     }
 
 
-
     @Test(enabled = true,priority = 3)
     @TestCase(id = "3000012", description = "订单生成")
     public void gas_order() throws Exception {
         String url = add + "/driver-center-api/gas/order";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
-        HEADER.put("X-AuthToken-With","wannengdatokenjiushini333333");
-        HEADER.put("openId","b88debaff2d356c6659164e7790efe68");
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
         bodyMap.put("originAmount", "20000");
-        bodyMap.put("oilId", "2500");
+        bodyMap.put("oilId", "3141");
         bodyMap.put("stationId", "101173");
         bodyMap.put("oilGunId", "11");
         bodyMap.put("oilGunNo", "13");
         bodyMap.put("couponSeq", "");
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
+        System.out.println("响应参数： " + resultJson);
+
+        /**获取订单编号*/
+        String data = PublicUtil.getResultJson(resultJson, "data");
+        JSONObject data_all = JSONObject.parseObject(data);
+        order = PublicUtil.getResultJson(data_all, "orderSn");
+        System.out.println(order);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000013", description = "加油订单信息")
+    public void gas_orderInfo_orderSn() throws Exception {
+        String url = add + "/driver-center-api/gas/orderInfo/181219194821569697";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 4)
+    @TestCase(id = "3000014", description = "订单支付")
+    public void gas_deposit_paySource() throws Exception {
+        String url = add + "/driver-center-api/gas/deposit/6";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+        bodyMap.put("payType", "2");
+        bodyMap.put("orderSn", order);
         System.out.println("请求参数： " + bodyMap);
         JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
         System.out.println("响应参数： " + resultJson);
@@ -324,6 +378,54 @@ public class driver_app {
         /*断言status的值与预期值是否一致*/
         Assert.assertEquals(actual_ret_status, status, "操作失败");
     }
+
+
+    @Test(enabled = true,priority = 5)
+    @TestCase(id = "3000015", description = "取消订单")
+    public void order_cancle_orderSn() throws Exception {
+        String url = add + "/driver-center-api/gas/order/cancle/"+order;
+        System.out.println(url);
+        LinkedHashMap<String, Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPut(url, HEADER, bodyMap);
+        System.out.println(resultJson);
+        System.out.println("响应参数： " + resultJson);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000016", description = "订单优惠券列表")
+    public void gas_coupons() throws Exception {
+        String url = add + "/driver-center-api/gas/coupons";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
 
 
 }
