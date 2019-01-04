@@ -22,6 +22,10 @@ public class driver_app {
     public String openId ;
     public String order ;
 
+    /***
+     login和push
+     ***/
+
     @Test(enabled = true,priority = 1)
     @TestCase(id = "3000001", description = "发短信(司机端通用)")
     public void validate_message_send() throws Exception {
@@ -175,6 +179,9 @@ public class driver_app {
         Assert.assertEquals(actual_ret_status, status, "操作失败");
     }
 
+    /***
+      找油网合作业务
+     ***/
 
     @Test(enabled = true,priority = 3)
     @TestCase(id = "3000007", description = "油品查询条件下拉列表")
@@ -425,6 +432,35 @@ public class driver_app {
         /*断言status的值与预期值是否一致*/
         Assert.assertEquals(actual_ret_status, status, "操作失败");
     }
+
+    /***
+     司机广告合作业务
+     ***/
+
+    @Test(enabled = false,priority = 3)
+    @TestCase(id = "3000017", description = "提交展陈审核接口（首次/日常）")
+    public void ad_check_submit() throws Exception {
+        String url = add + "/driver-center-api/ad/check/submit";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With","84032df31d5674957afbc59c89538607");
+        HEADER.put("openId","119fdfd6d3deb10843e682bc80f51e5c");
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+        bodyMap.put("thirdCode","");
+        bodyMap.put("imgList","");
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
+        System.out.println("响应参数： " + resultJson);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
 
 
 
