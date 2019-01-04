@@ -106,7 +106,7 @@ public class station_web {
     @Test(enabled = true,priority = 3)
     @TestCase(id = "2000004", description = "判断站点是否有核销权限-魔急便")
     public void station_permission_stationId() throws Exception {
-        String url = add + "/station-web/station/permission/125" ;
+        String url = add + "/scm-web/station/permission/125" ;
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",token);
@@ -197,7 +197,7 @@ public class station_web {
     @Test(enabled = true,priority = 3)
     @TestCase(id = "2000008", description = "站点商城-魔急便")
     public void home_appId_sn() throws Exception {
-        String url = add + "/station-web/station/shop/home/2/125";
+        String url = add + "/store-web/station/shop/home/2/125";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",token);
@@ -219,7 +219,7 @@ public class station_web {
     @Test(enabled = true,priority = 3)
     @TestCase(id = "2000009", description = "站点下订单-魔急便")
     public void order_appId_sn() throws Exception {
-        String url = add + "/station-web/station/order/2/125";
+        String url = add + "/store-web/station/order/2/125";
         String list = "{\"skuId\": 12,\"name\": \"熊本熊饮用水\",\"num\": 1,\"content\": \"\",\"price\": 1,\"perTotalPrice\": 1,\"showPrice\": \"0.01\",\"showPerTotalPrice\": \"0.01\"}";
         JSONArray Jsonlist = new JSONArray();
         Jsonlist.add(JSONObject.parseObject(list));
@@ -250,7 +250,7 @@ public class station_web {
     @Test(enabled = true,priority = 3)
     @TestCase(id = "2000010", description = "订单列表-魔急便")
     public void list_appId_stationId() throws Exception {
-        String url = add + "/station-web/station/order/list/2/125";
+        String url = add + "/store-web/station/order/list/2/125";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",token);
@@ -273,7 +273,7 @@ public class station_web {
     @Test(enabled = true,priority = 3)
     @TestCase(id = "2000011", description = "站点订单取消-魔急便")
     public void appId_orderSn_sn() throws Exception {
-        String url = add + "/station-web/station/order/cancel/2/181119118780169697/125";
+        String url = add + "/store-web/station/order/cancel/2/181119118780169697/125";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         HEADER.put("token",token);
