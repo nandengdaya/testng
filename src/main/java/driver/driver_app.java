@@ -7,10 +7,12 @@ import httputil.PublicUtil;
 import org.testng.annotations.Test;
 import testcase.TestCase;
 
+import java.util.Arrays;
 import java.util.LinkedHashMap;
 
 import static httputil.PublicUtil.add;
 import static httputil.PublicUtil.status;
+
 
 /**
  * @Author: megan
@@ -33,7 +35,7 @@ public class driver_app {
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
-        bodyMap.put("tel", "13200000001");
+        bodyMap.put("tel", "15658019697");
         System.out.println("请求参数： " + bodyMap);
         JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
         System.out.println("响应参数： " + resultJson);
@@ -56,7 +58,7 @@ public class driver_app {
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
 //        bodyMap.put("districSn","" );
-        bodyMap.put("tel", "13200000001");
+        bodyMap.put("tel", "15658019697");
         bodyMap.put("code", "6666");
         System.out.println("请求参数： " + bodyMap);
         JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
@@ -437,17 +439,216 @@ public class driver_app {
      司机广告合作业务
      ***/
 
-    @Test(enabled = false,priority = 3)
+    /***
+
+
+     提交展陈审核接口（首次/日常）
+     /driver-center-api/ad/check/submit,需要绑定广告，当前未绑定广告，断言也是未绑定广告，断言值"-3"
+
+     非特殊说明的，接口返回状态码断言都是成功（0）
+
+     ***/
+
+    @Test(enabled = true,priority = 3)
     @TestCase(id = "3000017", description = "提交展陈审核接口（首次/日常）")
     public void ad_check_submit() throws Exception {
         String url = add + "/driver-center-api/ad/check/submit";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
-        HEADER.put("X-AuthToken-With","84032df31d5674957afbc59c89538607");
-        HEADER.put("openId","119fdfd6d3deb10843e682bc80f51e5c");
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
-        bodyMap.put("thirdCode","");
-        bodyMap.put("imgList","");
+        bodyMap.put("thirdCode","100046");
+        bodyMap.put("imgList", Arrays.asList("https://img.mobilemart.cn/c6129e340b7316d6c69d17e5051927da"));
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
+        System.out.println("响应参数： " + resultJson);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality("-3", actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, "-3", "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000018", description = "查看相关司机审核记录列表接口")
+    public void ad_check_list() throws Exception {
+        String url = add + "/driver-center-api/ad/check/list";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000019", description = "查看此人有无最近一次审核状态接口（成功就静默通过提交，失败就弹框")
+    public void ad_check_status() throws Exception {
+        String url = add + "/driver-center-api/ad/check/status";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000020", description = "报名记录_报名安装")
+    public void ad_register_register() throws Exception {
+        String url = add + "/driver-center-api/ad/register/register";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
+        System.out.println("响应参数： " + resultJson);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000021", description = "广告开通页返回司机状态")
+    public void ad_apply_driverStatus() throws Exception {
+        String url = add + "/driver-center-api/ad/ad/apply/driverStatus";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000022", description = "返回司机皮套编码")
+    public void ad_driverBind_thirdCode() throws Exception {
+        String url = add + "/driver-center-api/ad/ad/driverBind/thirdCode";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000023", description = "返回司机广告收入")
+    public void ad_driver_earning() throws Exception {
+        String url = add + "/driver-center-api/ad/ad/driver/earning";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000024", description = "司机是否有过初次上传展陈审核接口")
+    public void ad_check_has_init() throws Exception {
+        String url = add + "/driver-center-api/ad/check/has/init";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    /***
+     司机抽奖业务
+     ***/
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000025", description = "周期内是否已抽奖")
+    public void lottery_check_actSn() throws Exception {
+        String url = add + "/driver-center-api/lottery/check/18121421402";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+//        bodyMap.put("actSn","18121421402");
         System.out.println("请求参数： " + bodyMap);
         JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
         System.out.println("响应参数： " + resultJson);
@@ -463,5 +664,346 @@ public class driver_app {
 
 
 
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000026", description = "抽奖接口")
+    public void lottery_lottery_actSn() throws Exception {
+        String url = add + "/driver-center-api/lottery/lottery/18121421402";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+        bodyMap.put("actSn","18121421402");
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
+        System.out.println("响应参数： " + resultJson);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        if (Integer.parseInt(actual_ret_status) == -1)
+        {
+            String response = Assert.verify_Equality("-1", actual_ret_status);
+            System.out.println(response + "------->原因是：" + actual_ret_msg);
+            /*断言status的值与预期值是否一致*/
+            Assert.assertEquals(actual_ret_status, "-1", "操作失败");
+        }
+        else{
+            String response = Assert.verify_Equality(status, actual_ret_status);
+            System.out.println(response + "------->原因是：" + actual_ret_msg);
+            /*断言status的值与预期值是否一致*/
+            Assert.assertEquals(actual_ret_status, status, "操作失败");
+        }
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000027", description = "抽奖次数")
+    public void lottery_account_num() throws Exception {
+        String url = add + "/driver-center-api/lottery/account/num?actSn=18121421402";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000028", description = "抽奖时的转盘信息接口")
+    public void lottery_info() throws Exception {
+        String url = add + "/driver-center-api/lottery/info?actSn=18121421402";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000029", description = "分享信息接口")
+    public void share_content() throws Exception {
+        String url = add + "/driver-center-api/share/content?actSn=18121421402";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000030", description = "周期分享增加抽奖次数接口")
+    public void share_add_times() throws Exception {
+        String url = add + "/driver-center-api/share/add/times";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+        bodyMap.put("actSn","18121421402");
+        bodyMap.put("shareUrl","http://h5.mobilemart.cn/test-activity/getMoreMoney.html?driverCode=3A98D67E6C81EFB43AE721479200D0CCB6F834F4F1637F74E71F8D59988DDA3CB229BA0CC948E860A8CFC751F4A6D848");
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
+        System.out.println("响应参数： " + resultJson);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        if (Integer.parseInt(actual_ret_status) == -7)
+        {
+            String response = Assert.verify_Equality("-7", actual_ret_status);
+            System.out.println(response + "------->原因是：" + actual_ret_msg);
+            /*断言status的值与预期值是否一致*/
+            Assert.assertEquals(actual_ret_status, "-7", "操作失败");
+        }
+        else{
+            String response = Assert.verify_Equality(status, actual_ret_status);
+            System.out.println(response + "------->原因是：" + actual_ret_msg);
+            /*断言status的值与预期值是否一致*/
+            Assert.assertEquals(actual_ret_status, status, "操作失败");
+        }
+
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000031", description = "抽奖页文字信息接口")
+    public void lottery_view() throws Exception {
+        String url = add + "/driver-center-api/lottery/view?actSn=18121421402";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    /***
+     basic业务
+     ***/
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000032", description = "获取司机状态权限信息")
+    public void basic_driver_info() throws Exception {
+        String url = add + "/driver-center-api/basic/driver/info";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000033", description = "语音接口开关控制")
+    public void basic_switch_ifVoice() throws Exception {
+        String url = add + "/driver-center-api/basic/switch/1";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+//        bodyMap.put("ifVoice","1");
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
+        System.out.println("响应参数： " + resultJson);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000034", description = "验证token")
+    public void basic_token_check() throws Exception {
+        String url = add + "/driver-center-api/basic//token/check";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = true,priority = 3)
+    @TestCase(id = "3000035", description = "版本控制-查看")
+    public void basic_version_phoneType() throws Exception {
+        String url = add + "/driver-center-api/basic/version/1";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        String result = HttpUtil.sendGet(url,HEADER,"");
+        System.out.println("响应参数： " + result);
+        /*返回结果转换成json对象*/
+        JSONObject resultJson = JSONObject.parseObject(result);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(PublicUtil.status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+
+    @Test(enabled = false,priority = 3)
+    @TestCase(id = "3000036", description = "版本控制-添加")
+    public void basic_version() throws Exception {
+        String url = add + "/driver-center-api/basic/version";
+        System.out.println(url);
+        LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+        bodyMap.put("versionCode","2.1");
+        bodyMap.put("buildNum","2");
+        bodyMap.put("lowestUpdateNum","1");
+        bodyMap.put("ifPop","");
+        bodyMap.put("phoneType","1");
+        bodyMap.put("updateMessage","1");
+        bodyMap.put("url","1");
+        bodyMap.put("message_desc","1");
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPost(url,HEADER ,bodyMap);
+        System.out.println("响应参数： " + resultJson);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = false,priority = 3)
+    @TestCase(id = "3000037", description = "版本控制-更新")
+    public void basic_version_put() throws Exception {
+        String url = add + "/driver-center-api/basic/version";
+        System.out.println(url);
+        LinkedHashMap<String, Object> HEADER = new LinkedHashMap<String, Object>();
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+        bodyMap.put("versionCode","2.1");
+        bodyMap.put("id","1");
+        bodyMap.put("buildNum","2");
+        bodyMap.put("lowestUpdateNum","1");
+        bodyMap.put("ifPop","");
+        bodyMap.put("phoneType","1");
+        bodyMap.put("updateMessage","1");
+        bodyMap.put("url","1");
+        bodyMap.put("message_desc","1");
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPut(url, HEADER, bodyMap);
+        System.out.println(resultJson);
+        System.out.println("响应参数： " + resultJson);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
+
+
+    @Test(enabled = false,priority = 6)
+    @TestCase(id = "3000038", description = "清除某token")
+    public void login_token_clear() throws Exception {
+        String url = add + "/driver-center-api/login/token/clear";
+        System.out.println(url);
+        LinkedHashMap<String, Object> HEADER = new LinkedHashMap<String, Object>();
+        HEADER.put("X-AuthToken-With",token);
+        HEADER.put("openId",openId);
+        LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
+        System.out.println("请求参数： " + bodyMap);
+        JSONObject resultJson = HttpUtil.sendPut(url, HEADER, bodyMap);
+        System.out.println(resultJson);
+        System.out.println("响应参数： " + resultJson);
+        /*取Json字符串里某Key值*/
+        String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
+        String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
+        /*验证预期值 和实际返回值是否一致*/
+        String response = Assert.verify_Equality(status, actual_ret_status);
+        System.out.println(response + "------->原因是：" + actual_ret_msg);
+        /*断言status的值与预期值是否一致*/
+        Assert.assertEquals(actual_ret_status, status, "操作失败");
+    }
 
 }
