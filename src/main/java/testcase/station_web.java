@@ -35,7 +35,7 @@ public class station_web {
     @Test(enabled = true,priority = 1)
     @TestCase(id = "2000001", description = "登录短信发送-魔急便")
     public void dingtalk_send_message() throws Exception {
-        String url = add + "/author-web/dingtalk/send/message?mobile=15658019697";
+        String url = add + "/account-web/dingtalk/send/message?mobile=15658019697";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         String result = HttpUtil.sendGet(url,HEADER,"");
@@ -56,10 +56,9 @@ public class station_web {
     @Test(enabled = true,priority = 3)
     @TestCase(id = "2000002", description = "验证token是否过期-魔急便")
     public void station_check_token() throws Exception {
-        String url = add + "/author-web/station/check/1d548326bf7009c115b300c599678030";
+        String url = add + "/account-web/station/check/" + token;
         System.out.println(url);
         LinkedHashMap<String, Object> HEADER = new LinkedHashMap<String, Object>();
-        HEADER.put("token", token);
         String result = HttpUtil.sendGet(url, HEADER, "");
         System.out.println("响应参数： " + result);
         JSONObject resultJson = JSONObject.parseObject(result);
@@ -77,7 +76,7 @@ public class station_web {
     @Test(enabled = true,priority = 2)
     @TestCase(id = "2000003", description = "站点操作员登录-魔急便")
     public void station_login() throws Exception {
-        String url = add + "/author-web/station/login";
+        String url = add + "/account-web/station/login";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         LinkedHashMap<String, Object> bodyMap = new LinkedHashMap<>();
