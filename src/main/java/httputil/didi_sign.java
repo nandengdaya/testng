@@ -22,6 +22,7 @@ public class didi_sign {
         final String SECRET = "Dd#4r8coupon?_7rfG@";
         String sign=null;
         Collections.sort(params, new Comparator<BasicNameValuePair>() {
+            @Override
             public int compare(BasicNameValuePair lhs, BasicNameValuePair rhs) {
                 return lhs.getName().compareTo(rhs.getName());
             }
@@ -43,6 +44,7 @@ public class didi_sign {
         final String SECRET = "WIfj@b1Spd3)T2@BDkF";
         String sign=null;
         Collections.sort(params, new Comparator<BasicNameValuePair>() {
+            @Override
             public int compare(BasicNameValuePair lhs, BasicNameValuePair rhs) {
                 return lhs.getName().compareTo(rhs.getName());
             }
