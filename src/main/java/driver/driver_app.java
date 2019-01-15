@@ -467,10 +467,19 @@ public class driver_app {
         String actual_ret_status = PublicUtil.getResultJson(resultJson, "error_code");
         String actual_ret_msg = PublicUtil.getResultJson(resultJson, "err_msg");
         /*验证预期值 和实际返回值是否一致*/
-        String response = Assert.verify_Equality("-3", actual_ret_status);
-        System.out.println(response + "------->原因是：" + actual_ret_msg);
-        /*断言status的值与预期值是否一致*/
-        Assert.assertEquals(actual_ret_status, "-3", "操作失败");
+        if (Integer.parseInt(actual_ret_status) == -3)
+        {
+            String response = Assert.verify_Equality("-3", actual_ret_status);
+            System.out.println(response + "------->原因是：" + actual_ret_msg);
+            /*断言status的值与预期值是否一致*/
+            Assert.assertEquals(actual_ret_status, "-3", "操作失败");
+        }
+        else{
+            String response = Assert.verify_Equality(status, actual_ret_status);
+            System.out.println(response + "------->原因是：" + actual_ret_msg);
+            /*断言status的值与预期值是否一致*/
+            Assert.assertEquals(actual_ret_status, status, "操作失败");
+        }
     }
 
 
