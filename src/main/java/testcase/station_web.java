@@ -35,7 +35,7 @@ public class station_web {
     @Test(enabled = true,priority = 1)
     @TestCase(id = "2000001", description = "登录短信发送-魔急便")
     public void dingtalk_send_message() throws Exception {
-        String url = add + "/account-web/dingtalk/send/message?mobile=15658019697";
+        String url = add + "/account-web/dingtalk/send/message?mobile=";
         System.out.println(url);
         LinkedHashMap<String,Object> HEADER = new LinkedHashMap<String, Object>();
         String result = HttpUtil.sendGet(url,HEADER,"");
